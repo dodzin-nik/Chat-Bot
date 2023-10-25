@@ -2,15 +2,15 @@ import flet as ft
 from fuzzywuzzy import fuzz
 from questions import q, default_answer
 
-class Chat(ft.UserControl):
+class ChatBot(ft.UserControl):
 
     def build(self):
         self.heading = ft.Text(value="Техподдержка", size=24)
-        self.text_input = ft.TextField(hint_text="Введите ваш вопрос", expand=True, multiline=True)
+        self.text_input = ft.TextField(hint_text="Введите ваш вопрос...", expand=True, multiline=True)
         self.output_column = ft.Column()
         self.scroll = True
         return ft.Column(
-            width=800,
+            width=370,
             controls=[
                 self.heading,
                 ft.Row(
@@ -32,12 +32,12 @@ class Chat(ft.UserControl):
         else:
             answer = default_answer
         self.output = answer
-        result = Output(self.output, self.text_input.value, self.outputDelete)
+        result = Output(self.output, self.text_input.value, self.removing)
         self.output_column.controls.append(result)
         self.text_input.value = ""
         self.update()
 
-    def outputDelete(self, result):
+    def removing(self, result):
         self.output_column.controls.remove(result)
         self.update()
 
@@ -55,14 +55,14 @@ class Output(ft.UserControl):
         self.display_view = ft.Column(controls=[self.input_display, self.output_display, self.delete_button])
         return self.display_view
 
-    def delete(self, e):
+    def delete(self, event):
         self.myoutput_delete(self)
 
 def main(page):
     page.scroll = True
     page.window_width = 370
     page.window_height = 440
-    mychat = Chat()
-    page.add(mychat)
+    chat = ChatBot()
+    page.add(chat)
 
 ft.app(target=main, port=8080, view=ft.AppView.WEB_BROWSER)
