@@ -13,19 +13,18 @@ class ChatMessage(ft.Row):
         super().__init__()
         self.vertical_alignment="start"
         self.controls=[
-                ft.CircleAvatar(
-                    content=ft.Text(self.get_initials(message.user_name)),
-                    color=ft.colors.WHITE,
-                    bgcolor=self.get_avatar_color(message.user_name),
-                ),
-                ft.Column(
-                    [
-                        ft.Text(message.user_name, weight="bold", color="#87703E", bgcolor="#87703E"),
-                        ft.Text(message.text, selectable=True, width=500, color="#87703E"),
-                    ],
-                    tight=True,
-                    spacing=5,
-                ),
+                ft.Container(
+                    ft.Column(
+                        [
+                            ft.Text(message.text, selectable=True, width=360, color="#E9D9C7"),
+                        ],
+                        tight=True,
+                        spacing=10,
+                    ),
+                border_radius=10,
+                width=300,
+                bgcolor="#87703E"
+                )
             ]
 
     def get_initials(self, user_name: str):
@@ -45,7 +44,9 @@ def main(page: ft.Page):
     page.title = "Техподдержка"
     page.theme_mode = "dark"
     page.bgcolor = "#E9D9C7"
-    
+    page.window_width=370
+    page.window_height=440
+    page.window_resizable = False    
 
     chat_bot = ChatBot()
 
@@ -79,7 +80,7 @@ def main(page: ft.Page):
     )
 
 
-    new_message = ft.TextField(
+    new_message =ft.TextField(
         hint_text="Введите ваш вопрос...",
         autofocus=True,
         shift_enter=True,
@@ -90,16 +91,15 @@ def main(page: ft.Page):
         border_radius=20,
         on_submit=send_message_click,
         bgcolor='#b29362'
-    )
+        )
 
     page.add(
         ft.Container(
-            ft.Row([ft.Text("           Косуля Маша", style="headlineLarge", color="#EBECE7")], alignment="start"),
-            ft.IconButton(icon='/icons/char.svg'),
+            ft.Row([ft.Image(src='icons/char.png'),ft.Text("Косуля Маша", color="#EBECE7")], alignment="start"),
             width=370,
-            height= 100,
+            height= 50,
             bgcolor='#B29362', 
-            border_radius=40
+            border_radius=50
         ),
         ft.Container(
             content=chat,
@@ -120,4 +120,4 @@ def main(page: ft.Page):
         ),
     )
 
-ft.app(port=8080, target=main, assets_dir='assets')
+ft.app(port=8080, target=main, assets_dir="assets")
