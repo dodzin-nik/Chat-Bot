@@ -1,4 +1,5 @@
 import flet as ft
+import flet_material as fm
 from bot import ChatBot
 
 class Message():
@@ -19,8 +20,8 @@ class ChatMessage(ft.Row):
                 ),
                 ft.Column(
                     [
-                        ft.Text(message.user_name, weight="bold"),
-                        ft.Text(message.text, selectable=True, width=500),
+                        ft.Text(message.user_name, weight="bold", color="#87703E", bgcolor="#87703E"),
+                        ft.Text(message.text, selectable=True, width=500, color="#87703E"),
                     ],
                     tight=True,
                     spacing=5,
@@ -34,18 +35,17 @@ class ChatMessage(ft.Row):
         colors_lookup = [
             ft.colors.CYAN,
             ft.colors.GREEN,
-            ft.colors.INDIGO,
             ft.colors.LIME,
             ft.colors.TEAL,
-            ft.colors.YELLOW,
         ]
         return colors_lookup[hash(user_name) % len(colors_lookup)]
 
 def main(page: ft.Page):
     page.horizontal_alignment = "stretch"
     page.title = "Техподдержка"
-    page.theme_mode = "light"
-
+    page.theme_mode = "dark"
+    page.bgcolor = "#E9D9C7"
+    
 
     chat_bot = ChatBot()
 
@@ -89,7 +89,7 @@ def main(page: ft.Page):
         expand=True,
         border_radius=20,
         on_submit=send_message_click,
-        border_color=ft.colors.BLUE
+        bgcolor='#b29362'
     )
 
     page.add(
@@ -114,4 +114,4 @@ def main(page: ft.Page):
         ),
     )
 
-ft.app(port=8080, target=main, view=ft.WEB_BROWSER)
+ft.app(port=8080, target=main)

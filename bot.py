@@ -11,7 +11,7 @@ class ChatBot():
 
             if self.user_text == "Соедините меня с оператором":
                 break
-            
+
             if fuzz.partial_ratio(user_text, q.get(1)[0]) >= 70:
                 answer = q.get(1)[1]
             elif fuzz.partial_ratio(user_text, q.get(2)[0]) >= 70:
