@@ -93,10 +93,16 @@ def main(page: ft.Page):
     )
 
     page.add(
-        ft.Row([ft.Text("Косуля Маша", style="headlineLarge", color="blue")], alignment="center"),
+        ft.Container(
+            ft.Row([ft.Text("           Косуля Маша", style="headlineLarge", color="#EBECE7")], alignment="start"),
+            ft.IconButton(icon='/icons/char.svg'),
+            width=370,
+            height= 100,
+            bgcolor='#B29362', 
+            border_radius=40
+        ),
         ft.Container(
             content=chat,
-            border=ft.border.all(2, ft.colors.BLUE),
             border_radius=20,
             padding=10,
             expand=True,
@@ -108,10 +114,10 @@ def main(page: ft.Page):
                     icon=ft.icons.SEND_ROUNDED,
                     tooltip="Send message",
                     on_click=send_message_click,
-                    icon_color=ft.colors.BLUE
+                    icon_color="#B29362"
                 ),
             ]
         ),
     )
 
-ft.app(port=8080, target=main)
+ft.app(port=8080, target=main, assets_dir='assets')
