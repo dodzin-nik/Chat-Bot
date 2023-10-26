@@ -22,8 +22,10 @@ class ChatBot():
                 answer = q.get(4)[1]
             elif fuzz.partial_ratio(user_text, q.get(5)[0]) >= 70:
                 answer = q.get(5)[1]
-            elif fuzz.partial_ratio(user_text, q.get(4)[0]) >= 70:
+            elif fuzz.partial_ratio(user_text, q.get(6)[0]) >= 70:
                 answer = q.get(6)[1]
+            elif fuzz.partial_ratio(user_text, q.get(7)[0]) >= 70:
+                answer = q.get(7)[1]
             else:
                 answer = default_answer
             
